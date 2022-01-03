@@ -77,13 +77,17 @@ const usuariosDAOPut =async  (req, res) => {
 };
 const usuariosDAODelete = async (req, res) => {
   const id = req.params.id;
-  console.log(`el id es :${id}`)
+
 // Elimina fisicamente pero no es recomendable por que se pierden las relaciones
   //  const usr =await Usuario.findByIdAndDelete(id);
 const usr=await Usuario.findByIdAndUpdate(id,{estado:false})
-console.log(usr)
+
+const usuarioAuth=req.usuario;
+
  res.json({
-   usr
+   usr,
+  //  usuarioAuth
+   
  })
 };
 
