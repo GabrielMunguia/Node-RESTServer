@@ -35,9 +35,14 @@
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
+
+
       function handleCredentialResponse(response) {
+        const url = ( window.location.hostname.includes('localhost') )
+                    ? 'http://localhost:8080/api/auth/google'
+                    : 'https://munguia-node-restserver.herokuapp.com/api/auth/google';
         const body = { id_token: response.credential }
-        fetch('http://localhost:8080/api/auth/google', {
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -57,8 +62,8 @@
 
       btnLogoutGoogle.addEventListener('click',async ()=>{
      
-        google.accounts.id.disableAutoSelect()
-        google.accounts.id.revoke(localStorage.getItem('email'), done => {
+      await   google.accounts.id.disableAutoSelect()
+      await google.accounts.id.revoke(localStorage.getItem('email'), done => {
             console.log('consent revoked');
             localStorage.clear()
             location.reload()
