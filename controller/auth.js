@@ -3,6 +3,7 @@ const Usuario= require('../models/usuario')
 
 const bcryptjs = require('bcryptjs');
 const generarJWT = require("../helpers/generar-jwt");
+const { GoogleVerify } = require("../helpers/google-verify");
 const login =  async  (req,res=response)=>{
 const {correo,password}=req.body;
     try{
@@ -53,6 +54,63 @@ return  res.status(400).json({
 
 }
 
+const google=async (req,res)=>{
+    const {id_token}=req.body;
+
+    try{
+
+       const {correo,nombre,img}= await GoogleVerify(id_token)
+
+       let usuario =await  Usuario.findOne({
+           correo
+       })
+      //SI el usuario no existe creamos uno
+       if(!usuario){
+        console.log('no existe')
+
+        const datos={
+            correo,
+            nombre,
+            img,
+            password:'...',
+            google:true,
+            estado:true
+            
+        }
+           usuario=new Usuario(datos)
+       
+        
+           await usuario.save();
+       }
+
+       //Validamos si el estado del usuario
+
+       if(!usuario.estado){
+           return res.status(401).json({
+               msj:'Error el usuario esta blockeado , comuniquese con el administrador'
+           })
+       }
+
+
+       const token = await generarJWT(usuario.id)
+
+      
+        res.json({
+            usuario,
+            token
+          
+        })
+
+    }catch(e){
+        console.log(e)
+        res.status(400).json({
+            msg: 'Token de Google no es válido'
+        })
+    }
+    
+}
+
 module.exports = {
-    login
+    login,
+    google
 }
