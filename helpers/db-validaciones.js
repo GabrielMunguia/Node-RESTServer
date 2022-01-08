@@ -52,11 +52,25 @@ const esRolValido=async (rol ="")=>{
     }
   }
 
+
+  const coleccionesPermitidas =(coleccion='',colecciones=[])=>{
+
+    const incluida= colecciones.includes(coleccion);
+
+    if(!incluida){
+       throw new Error (`La coleccion : ${coleccion} no es valida , lista de colecciones validas : ${colecciones}`);
+    }
+    
+    return true;
+
+  }
+
   module.exports = {
       esRolValido,
       emailExiste,
       usuarioExiste,
       existeCategoria,
       existeCategoriaNombre,
-      existeProducto
+      existeProducto,
+      coleccionesPermitidas
 }
