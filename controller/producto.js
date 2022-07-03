@@ -6,7 +6,7 @@ try {
     const {url}= req.body;
 
     const producto = await getProductoEbay(url);
-    console.log(producto);
+  
   return   res.status(200).json({
         status:true,
         data:producto
