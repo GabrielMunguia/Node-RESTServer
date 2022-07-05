@@ -10,11 +10,27 @@ const getProductoEbay =async(url)=>{
     const page = await browser.newPage();
     await page.goto(url);
     const data = await page.evaluate(() => {
+      let caracteristicasLabel= document.querySelectorAll("#viTabs_0_is .ux-layout-section-module .ux-labels-values__labels");
+      const valoresCaracteristicas =document.querySelectorAll("#viTabs_0_is .ux-layout-section-module .ux-labels-values__values");
+      let caracteristicas=[];
+      for(let i=0;i<caracteristicasLabel.length;i++){
+
+        caracteristicas.push({
+          label:caracteristicasLabel[i].innerText,
+          value:valoresCaracteristicas[i].innerText
+        });
+      }
+        let price =  document.querySelector("#prcIsum")?.innerText;
+     
+     
+
         const data = {
             title: document.querySelector("#LeftSummaryPanel > div.vi-swc-lsp > div:nth-child(1) > div > h1").innerText,
-            price: document.querySelector("#prcIsum")?.innerText,
+            price,
             image: document.querySelector("#icImg")?.src,
-            description: document.querySelector("#viTabs_0_is > div")?.innerHTML || "",
+            description: caracteristicas,
+         
+            
             // link: document.querySelector('#viewItemLink').href
         }
         return data;
