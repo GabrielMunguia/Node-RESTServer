@@ -16,7 +16,7 @@ const getProductoEbay =async(url)=>{
       for(let i=0;i<caracteristicasLabel.length;i++){
 
         caracteristicas.push({
-          label:caracteristicasLabel[i].innerText,
+          name:caracteristicasLabel[i].innerText,
           value:valoresCaracteristicas[i].innerText
         });
       }
