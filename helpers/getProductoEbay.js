@@ -26,11 +26,10 @@ const getProductoEbay =async(url)=>{
 
         const data = {
             title: document.querySelector("#LeftSummaryPanel > div.vi-swc-lsp > div:nth-child(1) > div > h1").innerText,
-            price,
+            price:price,
             image: document.querySelector("#icImg")?.src,
             description: caracteristicas,
-         
-            
+
             // link: document.querySelector('#viewItemLink').href
         }
         return data;

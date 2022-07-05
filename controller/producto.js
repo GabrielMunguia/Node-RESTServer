@@ -7,6 +7,7 @@ try {
     const {url}= req.body;
 
     const producto = await getProductoEbay(url);
+
     producto.price = await getPriceUSD(producto.price);
     producto.moneda="USD";
 
