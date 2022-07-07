@@ -1,6 +1,6 @@
 const { Convert } = require("easy-currencies");
 const getPriceUSD= async(precio)=>{
-
+console.log('este es el precio que llega :',precio);
   try {
     const lstMonedas= ["USD","US","EUR","GBP","JPY","CAD","AUD","NZD","CHF","HKD","SGD","SEK","DKK","NOK","KRW","TRY","RUB","INR","BRL","CNY","MYR","IDR","PHP","TWD","THB","VND","ZAR"];
     let monedaProducto = "USD";
