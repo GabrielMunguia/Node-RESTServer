@@ -31,6 +31,8 @@ console.log('este es el precio que llega :',precio);
         }
       })
 
+      console.log('este es el valor  :',valor);
+
     const precioEnDolares = await Convert(valor).from(monedaProducto).to("USD");
     return precioEnDolares.toFixed(2);
   } catch (error) {
