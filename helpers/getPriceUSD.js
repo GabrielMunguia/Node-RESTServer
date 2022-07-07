@@ -1,3 +1,5 @@
+const { Convert } = require("easy-currencies");
+
 const getPriceUSD = async (precio) => {
   console.log("este es el precio que llega :", precio);
   try {
@@ -32,6 +34,7 @@ const getPriceUSD = async (precio) => {
     ];
     let monedaProducto = "USD";
     let valor = 0;
+    console.log('este es el precio que llega :', precio);
     if (precio.includes("$")) {
       precio = precio.replace("$", "");
     }
