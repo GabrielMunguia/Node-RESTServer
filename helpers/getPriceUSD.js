@@ -55,10 +55,12 @@ const getPriceUSD = async (precio) => {
       }
     });
     valor = valor.replace("e", "");
-
+console.log('este es el valor que le llega al convert',valor);
     const precioEnDolares = await Convert(valor).from(monedaProducto).to("USD");
     return precioEnDolares.toFixed(2);
   } catch (error) {
+    console.log('ocurrio un error')
+    console.log(error.message)
     0;
   }
 };
