@@ -16,11 +16,17 @@ console.log('este es el precio que llega :',precio);
            if(moneda==="US"){
             monedaProducto="USD";
             valor=precio.replace("US","");
+           
+            
            }else{
             monedaProducto=moneda;
             valor=precio.replace(monedaProducto,"");
            }
-       
+           for(let i=0;i<valor.length;i++){
+            if(valor[i]!=="."&& isNaN(valor[i])){
+              valor=valor.replace(".","");
+            }
+        }
             
         }
       })
