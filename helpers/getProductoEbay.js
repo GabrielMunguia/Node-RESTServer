@@ -16,8 +16,8 @@ const getProductoEbay =async(url)=>{
       for(let i=0;i<caracteristicasLabel.length;i++){
 
         caracteristicas.push({
-          name:caracteristicasLabel[i].innerText,
-          value:valoresCaracteristicas[i].innerText
+          name:(caracteristicasLabel[i].innerText).replace(':',''),
+          value:(valoresCaracteristicas[i].innerText),
         });
       }
         let price =  document.querySelector("#prcIsum")?.innerText;
