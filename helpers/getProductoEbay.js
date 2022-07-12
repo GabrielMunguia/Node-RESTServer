@@ -8,7 +8,11 @@ const getProductoEbay =async(url)=>{
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
-    await page.goto(url);
+    await page.goto(url,{
+      waitUntil: 'load',
+      // Remove the timeout
+      timeout: 0
+    });
     const data = await page.evaluate(() => {
       let caracteristicasLabel= document.querySelectorAll("#viTabs_0_is .ux-layout-section-module .ux-labels-values__labels");
       const valoresCaracteristicas =document.querySelectorAll("#viTabs_0_is .ux-layout-section-module .ux-labels-values__values");
