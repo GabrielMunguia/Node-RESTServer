@@ -1,5 +1,5 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
 
 class Server {
   constructor() {
@@ -7,7 +7,8 @@ class Server {
     this.port = process.env.PORT;
 
     this.paths = {
-      productos: "/api/productos",
+      productos: '/api/productos',
+      opensea: '/api/opensea',
     };
 
     //MIDDLEWARES
@@ -17,12 +18,13 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.paths.productos, require("../routes/productos"));
+    this.app.use(this.paths.productos, require('../routes/productos'));
+    this.app.use(this.paths.opensea, require('../routes/opensea'));
   }
 
   middleware() {
     //Directorio publico
-    this.app.use(express.static("public"));
+    this.app.use(express.static('public'));
     //CORS
     this.app.use(cors());
     //Lectura y parseo del body en JSON
@@ -31,7 +33,7 @@ class Server {
 
   listen() {
     this.app.listen(process.env.PORT, () => {
-      console.log("localhost:", process.env.PORT);
+      console.log('localhost:', process.env.PORT);
     });
   }
 }
